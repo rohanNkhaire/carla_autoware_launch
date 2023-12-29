@@ -11,6 +11,10 @@
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
+  
+  <depend>carla_ros_bridge</depend>
+  <depend>carla_spawn_objects</depend>
+  <depend>carla_manual_control</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

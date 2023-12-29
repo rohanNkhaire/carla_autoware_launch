@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+	<!-- Global arguemnts -->
+	<arg name="use_sim_time" default="true" description="use_sim_time"/>
+	
+	<!-- carla ros bridge arguments -->
+	<arg name="host" default="localhost" description="Hostname of carla server"/>
+	<arg name="port" default="2000" description="TCP port of the CARLA server"/>
+	<arg name="fixed_delta_seconds" default="0.05" description="Simulation time (delta seconds) between simulation steps"/>
+	<arg name="town" default="Town01" description="Name of the town to load"/>
+	<arg name="ego_vehicle_role_name" default="ego_vehicle" description="Role name of the ego vehicle"/>
+
+	<!-- Spawn Vehicle arguments-->
+  <arg name="objects_definition_file" default="$(find-pkg-share carla_autoware_launch)/config/object_definition/objects.json" description="Loads the vehicle and sensors"/>
+
+	
 
   <!-- Carla ros bridge -->
-	<include file="$(find-pkg-share carla_ros_bridge)/launch/carla_ros_bridge.launch.py"/>
+	<include file="$(find-pkg-share carla_ros_bridge)/carla_ros_bridge.launch.py">
+		<arg name="town" value="Town02"/>
+	</include>
 
   <!-- Spawning vehicle -->
-	<include file="$(find-pkg-share carla_spawn_objects)/launch/carla_example_ego_vehicle.launch.py"/>
+	<include file="$(find-pkg-share carla_spawn_objects)/carla_example_ego_vehicle.launch.py">
+		<arg name="objects_definition_file" value="$(var objects_definition_file)"/>
+	</include>
 
 	<!-- Manual Control -->
-	<include file="$(find-pkg-share carla_manual_control)/launch/carla_manual_control.launch.py"/>
+	<include file="$(find-pkg-share carla_manual_control)/carla_manual_control.launch.py"/>
 
 </launch>
