@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- Carla ros bridge -->
+	<include file="$(find-pkg-share carla_ros_bridge)/launch/carla_ros_bridge.launch.py"/>
+
+  <!-- Spawning vehicle -->
+	<include file="$(find-pkg-share carla_spawn_objects)/launch/carla_example_ego_vehicle.launch.py"/>
+
+	<!-- Manual Control -->
+	<include file="$(find-pkg-share carla_manual_control)/launch/carla_manual_control.launch.py"/>
+
+</launch>
