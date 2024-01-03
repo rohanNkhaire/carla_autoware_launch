@@ -27,22 +27,13 @@
 	<include file="$(find-pkg-share carla_spawn_objects)/carla_example_ego_vehicle.launch.py">
 		<arg name="objects_definition_file" value="$(var objects_definition_file)"/>
 	</include>
-
-  <!-- Carla PCD processor -->	
-  	<node pkg="carla_pointcloud" name="carla_pointcloud" exec="carla_pointcloud_node" output="screen"/>
 	
   <!-- Carla autoware node -->
   	<node pkg="carla_autoware_transfer" name="carla_autoware_transfer" exec="carla_autoware_transfer" output="screen"> 
 	  <param name="groundtruth_localization" value="$(var groundtruth_localization)"/>
 	</node>
 
-  <!-- Autoware Carla node -->
-  	<node pkg="autoware_carla_transfer" name="autoware_carla_transfer" exec="autoware_carla_transfer" output="screen"/>
-
   <!-- Manual Control -->
-	<!--<include file="$(find-pkg-share carla_manual_control)/carla_manual_control.launch.py"/>-->	
-
-  <!-- Ackermann Controller --> 	 		
-	<node pkg="carla_ackermann_control" name="carla_ackermann_controller" exec="carla_ackermann_control_node"/>
+	<include file="$(find-pkg-share carla_manual_control)/carla_manual_control.launch.py"/>
 
 </launch>
