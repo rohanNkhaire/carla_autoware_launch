@@ -9,8 +9,11 @@
 	<arg name="fixed_delta_seconds" default="0.05" description="Simulation time (delta seconds) between simulation steps"/>
 	<arg name="town" default="Town01" description="Name of the town to load"/>
 	<arg name="ego_vehicle_role_name" default="ego_vehicle" description="Role name of the ego vehicle"/>
+	
+	<!-- carla autoware transfer arguments -->
+	<arg name="groundtruth_localization" default="false" description="Use carla for localization"/>
 
-	<!-- Spawn Vehicle arguments-->
+	<!-- Spawn Vehicle arguments -->
   <arg name="objects_definition_file" default="$(find-pkg-share carla_autoware_launch)/config/object_definition/objects.json" description="Loads the vehicle and sensors"/>
 
 	
@@ -25,7 +28,21 @@
 		<arg name="objects_definition_file" value="$(var objects_definition_file)"/>
 	</include>
 
-	<!-- Manual Control -->
-	<include file="$(find-pkg-share carla_manual_control)/carla_manual_control.launch.py"/>
+  <!-- Carla PCD processor -->	
+  	<node pkg="carla_pointcloud" name="carla_pointcloud" exec="carla_pointcloud_node" output="screen"/>
+	
+  <!-- Carla autoware node -->
+  	<node pkg="carla_autoware_transfer" name="carla_autoware_transfer" exec="carla_autoware_transfer" output="screen"> 
+	  <param name="groundtruth_localization" value="$(var groundtruth_localization)"/>
+	</node>
+
+  <!-- Autoware Carla node -->
+  	<node pkg="autoware_carla_transfer" name="autoware_carla_transfer" exec="autoware_carla_transfer" output="screen"/>
+
+  <!-- Manual Control -->
+	<!--<include file="$(find-pkg-share carla_manual_control)/carla_manual_control.launch.py"/>-->	
+
+  <!-- Ackermann Controller --> 	 		
+	<node pkg="carla_ackermann_control" name="carla_ackermann_controller" exec="carla_ackermann_control_node"/>
 
 </launch>
