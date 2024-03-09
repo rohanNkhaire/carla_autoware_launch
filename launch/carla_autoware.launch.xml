@@ -48,6 +48,9 @@
 	
 	<!-- Ackermann Control -->
 	<!-- Direct through Mache's DBW commands -->
-	<node pkg="autoware_carla_transfer" name="dbw_transfer_node" exec="dbw_actuation.py" output="screen"/>
+	<!--<node pkg="autoware_carla_transfer" name="dbw_transfer_node" exec="dbw_actuation.py" output="screen"/>-->
+	
+	<!-- Sync digital vehicle without dynamics -->
+	<node pkg="autoware_carla_transfer" name="sync_without_dynamics_node" exec="sync_without_dynamics.py" output="screen"/>
 
 </launch>
