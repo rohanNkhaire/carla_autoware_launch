@@ -20,7 +20,8 @@
 
   <!-- Carla ros bridge -->
 	<include file="$(find-pkg-share carla_ros_bridge)/carla_ros_bridge.launch.py">
-		<arg name="town" value="Town02"/>
+		<arg name="town" value="Town01"/>
+		<arg name="timeout" value="5.0"/>
 	</include>
 
   <!-- Spawning vehicle -->
